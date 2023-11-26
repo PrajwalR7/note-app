@@ -43,7 +43,7 @@ export const loginHandler = async (req: Request, res: Response) => {
         })
     }
 
-    const accessToken = jwt.sign(userDetails, envs.AUTH_SECRET)
+    const accessToken = jwt.sign(userDetails, envs.AUTH_SECRET, { expiresIn: '2 days' })
     return res.sendStatus(201).json({
         accessToken
     })
