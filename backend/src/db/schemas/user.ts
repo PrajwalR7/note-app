@@ -7,7 +7,13 @@ export interface UserType {
 }
 
 export const UserSchema = new Schema({
-    name: String,
-    email: String,
+    name: {
+        type: String,
+        unique: true
+    },
+    email: {
+        type: String,
+        unique: true
+    },
     password: String
 })

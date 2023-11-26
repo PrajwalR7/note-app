@@ -6,12 +6,10 @@ export const userHandler = async (req: Request, res: Response) => {
     try {
         switch (req.method) {
             case 'GET': {
-                await getHandler(req, res)
-                break
+                return await getHandler(req, res)
             }
             case 'DELETE': {
-                await deleteHandler(req, res)
-                break
+                return await deleteHandler(req, res)
             }
             default: {
                 res.send({

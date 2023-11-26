@@ -1,6 +1,6 @@
 import { model } from "mongoose";
-import { TodoSchema } from "./schemas/todo.js";
+import { NoteSchema } from "./schemas/note.js";
 import { UserSchema } from "./schemas/user.js";
 
-export const Todo = model('todo', TodoSchema)
+export const Note = model('todo', NoteSchema)
 export const User = model('user', UserSchema)
