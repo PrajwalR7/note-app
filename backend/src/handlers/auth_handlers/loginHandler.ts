@@ -44,7 +44,7 @@ export const loginHandler = async (req: Request, res: Response) => {
     }
 
     const accessToken = jwt.sign(userDetails, envs.AUTH_SECRET)
-    res.sendStatus(201).json({
+    return res.sendStatus(201).json({
         accessToken
     })
 }

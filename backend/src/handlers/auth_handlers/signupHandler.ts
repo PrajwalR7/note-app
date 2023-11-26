@@ -8,10 +8,10 @@ export const signupHandler = async (req: Request, res: Response) => {
     const userData = req.body
     const { name, email, password } = userData as UserType
 
-    // Hash the passowrd and then store it
     try {
         const hashedPassword = hashSync(password, 10)
         await upsertData({name, email, password: hashedPassword}, User)
+        return res.sendStatus(200)
     } catch(e) {
         return res.sendStatus(500).json({
             message: 'Something went wrong',
