@@ -1,4 +1,4 @@
-import { Model, model } from "mongoose";
+import { model } from "mongoose";
 import { TodoSchema } from "./schemas/todo.js";
 import { UserSchema } from "./schemas/user.js";
 

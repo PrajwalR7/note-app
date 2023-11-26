@@ -1,9 +1,9 @@
 import { Schema } from "mongoose";
 
 export interface UserType {
-    name: String,
-    email: String,
-    password: String
+    name: string,
+    email: string,
+    password: string
 }
 
 export const UserSchema = new Schema({

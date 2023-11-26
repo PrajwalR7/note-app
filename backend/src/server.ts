@@ -1,15 +1,13 @@
 import express from 'express'
-import bodyParser from 'express'
-import { handleGetTodos } from './handlers/handleGetTodos.js'
 import { dbConnect } from './middleware/dbConnect.js'
 import { dbDisconnect } from './middleware/dbDisconnect.js'
-import { handleUserRequests } from './handlers/handleUserRequests.js'
+import { userHandler } from './handlers/user_handlers/index.js'
 
 const app = express()
-app.use(bodyParser.urlencoded({extended: false}), bodyParser.json())
+app.use(express.urlencoded({extended: false}), express.json())
 app.use(dbConnect)
 
-app.post('/user/*', handleUserRequests)
+app.all('/user/*', userHandler)
 
 app.use(dbDisconnect)
 
