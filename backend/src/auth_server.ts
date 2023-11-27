@@ -3,10 +3,13 @@ import { dbConnect } from './middleware/dbConnect.js'
 import { dbDisconnect } from './middleware/dbDisconnect.js'
 import { loginHandler } from './handlers/auth_handlers/loginHandler.js'
 import { signupHandler } from './handlers/auth_handlers/signupHandler.js'
+import { handleCors } from './handlers/handleCors.js'
 
 const auth = express()
 auth.use(express.urlencoded({extended: false}), express.json())
 auth.use(dbConnect)
+
+auth.options("*", handleCors)
 
 auth.post('/signup', signupHandler)
 auth.post('/login', loginHandler)
