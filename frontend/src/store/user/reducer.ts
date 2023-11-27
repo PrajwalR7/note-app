@@ -16,7 +16,7 @@ export const initialUserState = {
     _id: ''
 }
 
-export const userReducer = (state: UserType, action: Action) => {
+export const userReducer = (state: UserType = initialUserState, action: Action) => {
     switch(action.type) {
         case 'insert': {
             return action.payload
@@ -26,6 +26,9 @@ export const userReducer = (state: UserType, action: Action) => {
                 ...state,
                 ...(action.payload as UserType)
             }
+        }
+        case 'flush': {
+            return initialUserState
         }
         default: {
             return state
