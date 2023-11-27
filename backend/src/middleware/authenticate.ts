@@ -6,14 +6,14 @@ import { UserType } from "../db/schemas/user.js";
 import { CustomRequest } from "../types.js";
 
 export const authenticate = async (req: CustomRequest, res: Response, next: NextFunction) => {
-    const user_name = req.cookies.user_name
-    if (user_name) {
-        req.user_name = user_name
+    if (req.cookies && req.cookies.user_name) {
+        req.user_name = req.cookies.user_name
         next()
     }
     const authToken = req.headers.authorization
+    console.log(authToken)
     if (!authToken) {
-        res.sendStatus(403).json({
+        return res.status(403).json({
             message: 'Unauthorized'
         })
     }
@@ -24,14 +24,12 @@ export const authenticate = async (req: CustomRequest, res: Response, next: Next
     }).exec()
 
     if (!user) {
-        res.sendStatus(403).json({
+        return res.status(401).json({
             message: 'Unauthorized'
         })
     }
-
     // This is to maintian session for the current user, preventing repeated calls to DB for authentication
     res.cookie('user_name', user.name, { maxAge: 900000, httpOnly: true })
     req.user_name = user.name
-
     next()
 }

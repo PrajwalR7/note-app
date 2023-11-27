@@ -5,7 +5,8 @@ export interface NoteType {
     description: string,
     postedOn: Date,
     private: boolean,
-    postedBy: string
+    author: string,
+    authorID: Types.ObjectId
     _id?: Types.ObjectId
 }
 
@@ -14,5 +15,6 @@ export const NoteSchema = new Schema({
     description: String,
     postedOn: Date,
     private: Boolean,
-    postedBy: String
+    author: String,
+    authorID: Types.ObjectId
 })

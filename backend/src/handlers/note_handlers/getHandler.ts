@@ -14,11 +14,12 @@ export const getHandler = async (req: CustomRequest, res: Response) => {
             description: entry.description,
             postedOn: entry.postedOn,
             private: entry.private,
-            postedBy: entry.postedBy
+            auhtor: entry.author,
+            authorID: entry.authorID
         }
     })
 
-    return res.sendStatus(200).json({
+    return res.status(200).json({
         notes: noteData
     })
 }

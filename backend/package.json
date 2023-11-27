@@ -6,7 +6,8 @@
   "main": "build/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npx nodemon"
+    "dev": "npx nodemon ./src/server.ts",
+    "dev:auth": "npx nodemon ./src/auth_server.ts"
   },
   "keywords": [],
   "author": "",

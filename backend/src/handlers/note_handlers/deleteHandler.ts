@@ -5,7 +5,7 @@ import { Note } from "../../db/models.js";
 export const deleteHandler = async (req: CustomRequest, res: Response) => {
     const note_id = req.body.note_id
     if (!note_id) {
-        return res.sendStatus(401).json({
+        return res.status(401).json({
             message: 'Invalid request, expected \'note_id\' found none'
         })
     }
@@ -14,7 +14,7 @@ export const deleteHandler = async (req: CustomRequest, res: Response) => {
     }).exec()
     
     if (!deleteResult.acknowledged) {
-        return res.sendStatus(500).json({
+        return res.status(500).json({
             message: 'Something went wrong while deleting the note'
         })
     }

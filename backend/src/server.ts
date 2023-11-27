@@ -7,11 +7,11 @@ import { noteHandler } from './handlers/note_handlers/index.js'
 
 const app = express()
 app.use(express.urlencoded({extended: false}), express.json())
-app.use(authenticate)
 app.use(dbConnect)
+app.use(authenticate)
 
-app.all('/user/*', userHandler)
-app.all('/notes/*', noteHandler)
+// app.all('/user/*', userHandler)
+app.all('/notes', noteHandler)
 
 app.use(dbDisconnect)
 

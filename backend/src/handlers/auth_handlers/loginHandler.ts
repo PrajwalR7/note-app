@@ -14,9 +14,7 @@ export const loginHandler = async (req: Request, res: Response) => {
     const userData = req.body as LoginUserDataType
 
     const { email, name, password } = userData
-    let filterQuery: Record<string, unknown> = {
-        password: {$eq: password}
-    }
+    let filterQuery: Record<string, unknown>
     if (email) {
         filterQuery = {
             ...filterQuery,
@@ -29,22 +27,28 @@ export const loginHandler = async (req: Request, res: Response) => {
             name: {$eq: name}
         }
     }
+    console.log(filterQuery)
     const userDetails = await User.findOne(filterQuery).exec()
     if (!userDetails) {
-        return res.sendStatus(403).json({
+        return res.status(403).json({
             message: 'User details not found'
         })
     }
 
     const isPasswordValid = compareSync(password, userDetails.password)
     if (!isPasswordValid) {
-        res.sendStatus(403).json({
+        res.status(403).json({
             message: 'Incorrect password'
         })
     }
-
-    const accessToken = jwt.sign(userDetails, envs.AUTH_SECRET, { expiresIn: '2 days' })
-    return res.sendStatus(201).json({
+    const payload = {
+        name: userDetails.name,
+        email: userDetails.email,
+        password: userDetails.password,
+        id: userDetails._id
+    }
+    const accessToken = jwt.sign(payload, envs.AUTH_SECRET, { expiresIn: '2 days' })
+    return res.status(201).json({
         accessToken
     })
 }

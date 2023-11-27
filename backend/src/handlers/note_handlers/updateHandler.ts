@@ -10,7 +10,7 @@ export const updateHandler = async (req: CustomRequest, res: Response) => {
     }, updatedNote).exec()
     
     if (!updatedResult.acknowledged) {
-        return res.sendStatus(500).json({
+        return res.status(500).json({
             message: 'Something went wrong while updating the note'
         })
     }
