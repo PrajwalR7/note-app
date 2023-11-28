@@ -9,6 +9,7 @@ export enum NOTE_ACTIONS {
 }
 
 export const bulkUpsertAction = (payload: unknown) => {
+    console.log('PAYLOAD - ', payload)
     return {
         type: NOTE_ACTIONS.BULK_UPSERT,
         payload
@@ -37,6 +38,7 @@ export const fetchPosts = (accessToken: string) => {
             }
         })
         .catch(err => {
+            console.log(err)
             dispatch(failAction(err))
         })
     }

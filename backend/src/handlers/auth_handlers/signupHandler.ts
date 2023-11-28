@@ -7,11 +7,11 @@ import { User } from "../../db/models.js";
 export const signupHandler = async (req: Request, res: Response) => {
     const userData = req.body
     const { name, email, password } = userData as UserType
-
     try {
-        const hashedPassword = hashSync(password, 10)
-        await upsertData({name, email, password: hashedPassword}, User)
-        return res.sendStatus(200)
+        const hashedPassword = hashSync(password, 3)
+        const userDetails = await upsertData({name, email, password: hashedPassword}, User)
+        console.log('Upserted User details - ', userDetails)
+        return res.status(200).json(userDetails)
     } catch(e) {
         if (e.code === 11000) {
             return res.status(400).json({

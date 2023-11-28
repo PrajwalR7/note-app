@@ -10,13 +10,12 @@ export interface NoteType {
     _id?: string
 }
 
-export const initialNoteState: NoteType[] = []
+export const initialNoteState = []
 
 export const noteReducer = (state: NoteType[] = initialNoteState, action: Action) => {
     switch(action.type) {
         case 'bulk_upsert': {
-            state.push(action.payload as NoteType)
-            return state
+            return action.payload
         }
         default: {
             return state

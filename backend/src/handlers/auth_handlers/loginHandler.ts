@@ -34,10 +34,11 @@ export const loginHandler = async (req: Request, res: Response) => {
             message: 'User details not found'
         })
     }
-
+    console.log(userDetails)
     const isPasswordValid = compareSync(password, userDetails.password)
+    console.log('isPasswordValid', isPasswordValid)
     if (!isPasswordValid) {
-        res.status(403).json({
+        return res.status(401).json({
             message: 'Incorrect password'
         })
     }
@@ -49,6 +50,7 @@ export const loginHandler = async (req: Request, res: Response) => {
     }
     const accessToken = jwt.sign(payload, envs.AUTH_SECRET, { expiresIn: '2 days' })
     return res.status(201).json({
+        ...payload,
         accessToken
     })
 }

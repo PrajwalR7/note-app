@@ -7,9 +7,9 @@ import { handleCors } from './handlers/handleCors.js'
 
 const auth = express()
 auth.use(express.urlencoded({extended: false}), express.json())
+auth.use(handleCors)
 auth.use(dbConnect)
 
-auth.options("*", handleCors)
 
 auth.post('/signup', signupHandler)
 auth.post('/login', loginHandler)

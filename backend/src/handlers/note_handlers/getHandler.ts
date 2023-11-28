@@ -1,11 +1,13 @@
 import { Response } from "express";
 import { CustomRequest } from "../../types.js";
-import { Note, User } from "../../db/models.js";
+import { Note } from "../../db/models.js";
 
 export const getHandler = async (req: CustomRequest, res: Response) => {
     const findResult = await Note.find({
-        private: { $eq: true },
-        postedBy: { $eq: req.user_name }
+        $or: [
+            { author: { $eq: req.user_name } },
+            { private: {$eq: false} }
+        ]
     }).exec()
 
     const noteData = findResult.map(entry => {
@@ -14,7 +16,7 @@ export const getHandler = async (req: CustomRequest, res: Response) => {
             description: entry.description,
             postedOn: entry.postedOn,
             private: entry.private,
-            auhtor: entry.author,
+            author: entry.author,
             authorID: entry.authorID
         }
     })

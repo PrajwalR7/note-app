@@ -6,7 +6,6 @@ import { updateHandler } from "./updateHandler.js";
 import { postHandler } from "./postHandler.js";
 
 export const noteHandler = async (req: CustomRequest, res: Response) => {
-    console.log(req.method)
     try {
         switch(req.method) {
             case 'GET': {

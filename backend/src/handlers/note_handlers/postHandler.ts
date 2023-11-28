@@ -17,6 +17,6 @@ export const postHandler = async (req: CustomRequest, res: Response) => {
         authorID: authorDetails._id,
         author: req.user_name 
     }
-    await upsertData(upsertNoteData, Note)
-    return res.sendStatus(200) 
+    const upsertResult = await upsertData(upsertNoteData, Note)
+    return res.status(200).json(upsertResult) 
 }

@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import { MouseEvent, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AUTH_SERVER_URL } from '../consts'
@@ -21,15 +21,14 @@ export default function Signup() {
             email: emailRef.current?.value,
             password: passwordRef.current?.value
         }
-
-        const response = await axios.post(`${AUTH_SERVER_URL}/signup`, userObj)
-        if (response.status === 400) {
-            setUserAlreadyPresent(true)
-        } else if (response.status === 500) {
-            // Internal server error
-        } else {
+        try {
+            const response = await axios.post(`${AUTH_SERVER_URL}/signup`, userObj)
             dispatch(insertUser(response.data))
             navigate('/login')
+        } catch(e) {
+            if((e as AxiosError).response?.status === 400) {
+                setUserAlreadyPresent(true)
+            }
         }
     }
 

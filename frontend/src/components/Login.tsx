@@ -5,6 +5,7 @@ import { AUTH_SERVER_URL } from '../consts'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../store'
 import { updateUser } from '../store/user/action'
+import { UserType } from '../store/user/reducer'
 
 export default function Login() {
     const nameRef = useRef<HTMLInputElement>(null)
@@ -31,12 +32,16 @@ export default function Login() {
         }
         try {
             const loginResult = await axios.post(`${AUTH_SERVER_URL}/login`, loginObj)
-            dispatch(updateUser({
+            const userObj: UserType = {
+                name: loginResult.data.name,
+                email: loginResult.data.email,
+                password: loginResult.data.password,
+                _id: loginResult.data._id,
                 accessToken: loginResult.data.accessToken
-            }))
+            }
+            dispatch(updateUser(userObj))
             navigate('/')
         } catch(e) {
-            console.log('setting auth false')
             setAuthenticated(false)            
         }
     }

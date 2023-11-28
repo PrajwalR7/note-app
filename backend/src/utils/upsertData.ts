@@ -1,7 +1,7 @@
-import { Model } from "mongoose"
+import { AnyKeys, Model } from "mongoose"
 
 export const upsertData = async (newData: unknown, model: typeof Model) => {
+    console.log('upserting data')
     await model.init()
-    await model.create(newData)
-    console.log('Data upserted')
+    return await model.create<AnyKeys<typeof Model>>(newData)
 }

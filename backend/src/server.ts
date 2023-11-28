@@ -8,10 +8,10 @@ import { handleCors } from './handlers/handleCors.js'
 
 const app = express()
 app.use(express.urlencoded({extended: false}), express.json())
+app.use(handleCors)
 app.use(dbConnect)
 app.use(authenticate)
 
-app.options('*', handleCors)
 
 app.all('/user', userHandler)
 app.all('/notes', noteHandler)

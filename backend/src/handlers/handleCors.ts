@@ -1,9 +1,9 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 
-export const handleCors = (req: Request, res: Response) => {
-    res.setHeader("Access-Control-Allow-Origin", 'localhost:5173')
-    res.setHeader("Access-Control-Allow-Methods", ["GET", "POST", "PUT", "DELETE"])
+export const handleCors = (req: Request, res: Response, next: NextFunction) => {
+    res.setHeader("Access-Control-Allow-Origin", '*')
+    res.setHeader("Access-Control-Allow-Methods", "*")
     res.setHeader("Access-Control-Allow-Headers", "*")
-
-    return res.sendStatus(200)
+    if (req.method === 'OPTIONS') return res.sendStatus(200)
+    next()
 }

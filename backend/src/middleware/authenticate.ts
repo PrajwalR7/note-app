@@ -11,7 +11,6 @@ export const authenticate = async (req: CustomRequest, res: Response, next: Next
         next()
     }
     const authToken = req.headers.authorization
-    console.log(authToken)
     if (!authToken) {
         return res.status(403).json({
             message: 'Unauthorized'
