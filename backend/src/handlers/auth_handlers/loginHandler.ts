@@ -42,12 +42,14 @@ export const loginHandler = async (req: Request, res: Response) => {
             message: 'Incorrect password'
         })
     }
+    console.log(userDetails)
     const payload = {
         name: userDetails.name,
         email: userDetails.email,
         password: userDetails.password,
-        id: userDetails._id
+        _id: userDetails._id
     }
+    console.log('SIGNING PAYLOAD - ', payload)
     const accessToken = jwt.sign(payload, envs.AUTH_SECRET, { expiresIn: '2 days' })
     return res.status(201).json({
         ...payload,

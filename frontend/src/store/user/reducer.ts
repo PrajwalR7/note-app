@@ -21,7 +21,8 @@ export const userReducer = (state: UserType = initialUserState, action: Action) 
         case 'insert': {
             return action.payload
         }
-        case 'update': {
+        case 'update_user': {
+            console.log('Calling update reducer in user')
             return {
                 ...state,
                 ...(action.payload as UserType)

@@ -28,6 +28,7 @@ export const noteHandler = async (req: CustomRequest, res: Response) => {
             }
         }
     } catch(e) {
+        console.log(e)
         return res.send({
             message: 'Something went wrong',
             server_error_message: (e as Error).message,

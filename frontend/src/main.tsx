@@ -9,7 +9,8 @@ import Signup from './components/Signup.tsx'
 import { StateManager } from './utils/stateManager.ts'
 
 window.addEventListener('beforeunload', () => {
-    new StateManager().saveState(store.getState())
+    const currState = store.getState()
+    new StateManager().saveState({user: currState.user})
 })
 
 const router = createBrowserRouter([

@@ -3,9 +3,9 @@ import { CustomRequest } from "../../types.js";
 import { Note } from "../../db/models.js";
 
 export const deleteHandler = async (req: CustomRequest, res: Response) => {
-    const note_id = req.body.note_id
+    const note_id = req.query.note_id
     if (!note_id) {
-        return res.status(401).json({
+        return res.status(403).json({
             message: 'Invalid request, expected \'note_id\' found none'
         })
     }

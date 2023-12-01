@@ -12,6 +12,7 @@ export const getHandler = async (req: CustomRequest, res: Response) => {
 
     const noteData = findResult.map(entry => {
         return  {
+            _id: entry._id,
             title: entry.title,
             description: entry.description,
             postedOn: entry.postedOn,

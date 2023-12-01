@@ -3,12 +3,14 @@ import thunk, { ThunkDispatch } from 'redux-thunk'
 import { userReducer } from "./user/reducer";
 import { noteReducer } from "./note/reducer";
 import { StateManager } from "../utils/stateManager";
+import { statusReducer } from "./status/reducer";
 
 const stateManager = new StateManager()
 
 const reducer = combineReducers({
     user: userReducer,
-    note: noteReducer
+    note: noteReducer,
+    status: statusReducer
 })
 
 const store = configureStore({

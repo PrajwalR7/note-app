@@ -12,7 +12,6 @@ app.use(handleCors)
 app.use(dbConnect)
 app.use(authenticate)
 
-
 app.all('/user', userHandler)
 app.all('/notes', noteHandler)
 

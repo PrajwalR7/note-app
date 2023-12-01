@@ -8,7 +8,6 @@ export const updateHandler = async (req: CustomRequest, res: Response) => {
     const updatedResult = await Note.updateOne({
         _id: { $eq: updatedNote._id }
     }, updatedNote).exec()
-    
     if (!updatedResult.acknowledged) {
         return res.status(500).json({
             message: 'Something went wrong while updating the note'

@@ -13,7 +13,7 @@ export class StateManager {
     }
     saveState(state: unknown) {
         if (localStorage.getItem(LS_STORE_KEY) !== null) {
-            const stringifiedState = JSON.stringify(state)
+            const stringifiedState = JSON.stringify({...state as {}, status: {}, note: []})
             localStorage.setItem(LS_STORE_KEY, stringifiedState)
         } 
     }
@@ -21,7 +21,8 @@ export class StateManager {
         localStorage.setItem(LS_STORE_KEY, '')
         return {
             user: {},
-            note: {}
+            note: {},
+            status: {},
         }
     }
 }
